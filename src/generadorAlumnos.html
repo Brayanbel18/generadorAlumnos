@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generador de Alumnos, Académicos o Administrativos 5000 - Brayan Beltran Calvo</title>
+
+    <script>
+
+    const primer_apellido = [
+      "García", "Rodríguez", "Martínez", "Hernández", "López", "González", "Pérez", "Sánchez", "Ramírez", "Torres",
+      "Flores", "Vázquez", "Rivera", "Gómez", "Díaz", "Reyes", "Morales", "Ortiz", "Castillo", "Chávez",
+      "Ruiz", "Alvarez", "Fernández", "Jiménez", "Moreno", "Ramos", "Díaz", "Álvarez", "Vargas", "Castro",
+      "Rojas", "Chavez", "Silva", "Cortés", "Santiago", "Mendoza", "Delgado", "Espinoza", "Aguilar", "Contreras",
+      "Salazar", "Arias", "Figueroa", "Montes", "Guzmán", "Sosa", "Valdez", "Mejía", "Solís", "Padilla",
+      "Messi", "Gallardo", "Barrera", "Campos", "Vega", "Luna", "Carrillo", "Montoya", "Lara", "León",
+      "Miranda", "Guerrero", "Cruz", "Navarro", "Herrera", "Villanueva", "Medina", "Pacheco", "Orozco", "Gallo",
+      "Méndez", "Serrano", "Tapia", "Molina", "Aguirre", "Juárez", "Sandoval", "Barrios", "Andrade", "Espinosa",
+      "Villarreal", "Cabrera", "Nava", "Miramontes", "Ochoa", "Aguilera", "Villalobos", "Calderón", "Peralta", "Santos",
+      "Castañeda", "Rosales", "Galarza", "Esparza", "Santana", "Herrero", "Avila", "Ponce", "Segura", "Navarro",
+      "Escobedo", "Trejo", "Fuentes", "Cervantes", "Gallardo", "Herrera", "Jiménez", "Valencia", "Franco", "Padrón",
+      "Salinas", "Del Rio", "Valenzuela", "Mercado", "Huerta", "Soria", "Sotelo", "Duran", "Verdugo", "Guevara",
+      "Manzano", "Olivares", "Hidalgo", "Lamas", "Guerra", "Escamilla", "Ojeda", "Montenegro", "Bravo", "Trujillo",
+      "De León", "Aguayo", "Toledo", "Macías", "Leyva", "Alvarado", "Palacios", "Beltran", "Barajas", "Casillas",
+      "Tovar", "Bautista", "Estrada", "Salgado", "Quintero", "Uribe", "Leyva", "Osorio", "Becerra", "Meléndez",
+      "Zavala", "Zúñiga", "Saucedo", "Amador", "Ríos", "Cardona", "Villanueva", "Cárdenas", "Canales", "Villegas",
+      "De la Rosa", "Urbina", "Borrego", "Cadena", "Castañeda", "Dominguez", "Escalante", "Fierro", "Gaytán", "Heredia",
+      "Jurado", "Lara", "Lemus", "Lerma", "Macías", "Maciel", "Magallón", "Noriega", "Núñez", "Olivas",
+      "Ortega", "Paz", "Quezada", "Raya", "Osuna", "Reyna", "Rico", "Rocha", "Rodarte", "Roque",
+      "Rosas", "Salas", "Sepúlveda", "Serna", "Suárez", "Tejeda", "Téllez", "Terrazas", "Tovar", "Trejo",
+      "Urbina", "Valadez", "Valle", "Valverde", "Varela", "Velasco", "Vera", "Vidal", "Zaragoza", "Zavala"
+    ]
+
+    const segundo_apellido = [
+      "Silva", "Santos", "Pereira", "Fernandes", "Martins",
+      "Rodrigues", "Sousa", "Gomes", "Lopes", "Marques",
+      "Alves", "Ferreira", "Costa", "Oliveira", "Pinto",
+      "Carvalho", "Teixeira", "Moreira", "Mendes", "Nunes",
+      "Ribeiro", "Cruz", "Machado", "Neves", "Correia",
+      "Dias", "Reis", "Lima", "Barbosa", "Antunes",
+      "Mota", "Coelho", "Vieira", "Jesus", "Gonçalves",
+      "Almeida", "Cardoso", "Ramos", "Borges", "Esteves",
+      "Fonseca", "Araújo", "Figueiredo", "Freitas", "Guerra",
+      "Pires", "Simões", "Tavares", "Vargas", "Xavier",
+      "Azevedo", "Cunha", "Duarte", "Faria", "Garcia",
+      "Lourenço", "Macedo", "Nogueira", "Oliveira", "Quaresma",
+      "Rocha", "Sampaio", "Trindade", "Valente", "Zambrano",
+      "Andrade", "Baptista", "Castro", "Dantas", "Estrada",
+      "Feliciano", "Gil", "Horta", "Inácio", "Jardine",
+      "Leite", "Magalhães", "Nóbrega", "Ortega", "Pedroso",
+      "Queirós", "Rangel", "Santana", "Tomás", "Urbano",
+      "Vasconcelos", "Wagner", "Ximenes", "Yanes", "Zarco",
+      "Abreu", "Bessa", "Camacho", "Diniz", "Eanes",
+      "Furtado", "Gouveia", "Hernandez", "Calvo", "Joaquim",
+      "Keller", "Lira", "Monteiro", "Nascimento", "Osório",
+      "Pacheco", "Queiroz", "Ramalho", "Serra", "Teles",
+      "Macias", "Villanova", "Wanderley", "Xisto", "Yasuda",
+      "Zaragoza", "Albuquerque", "Braga", "Carmo", "Dourado",
+      "Esteves", "Fraga", "Gusmão", "Holanda", "Iglesias",
+      "Jesus", "Klein", "Lobo", "Mendonça", "Nobre",
+      "Otero", "Peixoto", "Quintana", "Rocha", "Siqueira",
+      "Travassos", "Ulrich", "Vargas", "Watanabe", "Xavier",
+      "Yamamoto", "Zanetti", "Alcântara", "Brito", "Cordeiro",
+      "Diniz", "Elias", "Fonseca", "Garrido", "Henrique",
+      "Ibrahim", "Jardim", "Kato", "Luna", "Moraes",
+      "Nascimento", "Oliveira", "Pires", "Queirós", "Rosa",
+      "Santos", "Teixeira", "Uchoa", "Vieira", "Xavier",
+      "Yamada", "Zambrano", "Kwame", "Nkrumah", "Osei", "Acheampong", "Sankara",
+      "Mandela", "Zuma", "Ghana", "Abiola", "Mugabe",
+      "Kenya", "Odinga", "Soweto", "Toure", "Mali",
+      "Azikiwe", "Kagame", "Zik", "Nyerere", "Selassie",
+      "Tutu", "Biko", "Madiba", "Rwanda", "Kenyatta",
+      "Sobukwe", "Haile", "Zewde", "Lumumba", "Garvey",
+      "Odinga", "Kabila", "Nkrumah", "Machel", "Nujoma",
+      "Boateng", "Kofi", "Azania", "Tambo", "Lagos",
+      "Lomé", "Ouattara", "Bamba", "Dos Santos", "Nguema",
+      "Koulibaly", "Diallo", "Keita", "Mensah", "Jallow",
+      "Sylla", "Diop", "Traoré", "Dlamini", "Moyo",
+      "Nkosi", "Chukwu", "Obi", "Okafor", "Okeke",
+      "Chinonso", "Onyeka", "Osei", "Amoah", "Asante",
+      "Djibril", "Kante", "Kouyaté", "Sissoko", "Diawara"
+    ];
+
+    const primer_nombre = [
+      "William", "Olivia", "George", "Amelia", "Harry",
+      "Isla", "Jack", "Ava", "James", "Emily",
+      "Thomas", "Mia", "Arthur", "Isabella", "Edward",
+      "Sophia", "Henry", "Lily", "Alexander", "Grace",
+      "Freddie", "Charlotte", "Oscar", "Evie", "Leo",
+      "Sophie", "Archie", "Ella", "Charlie", "Ruby",
+      "Samuel", "Jessica", "Daniel", "Poppy", "Joseph",
+      "Alice", "David", "Florence", "Lewis", "Rosie",
+      "Matthew", "Sienna", "Jacob", "Phoebe", "Max",
+      "Scarlett", "Lucas", "Chloe", "Theo", "Daisy",
+      "Benjamin", "Freya", "Oliver", "Layla", "Luke",
+      "Matilda", "Joshua", "Aisha", "Noah", "Maisie",
+      "Ethan", "Eleanor", "Ryan", "Millie", "Aiden",
+      "Harper", "Michael", "Harriet", "Alexander", "Eva",
+      "Nathan", "Isabelle", "William", "Ivy", "Jake",
+      "Zara", "Daniel", "Sophia", "Theodore", "Evelyn",
+      "James", "Alice", "Matthew", "Elsie", "Sebastian",
+      "Lola", "Adam", "Willow", "Andrew", "Holly",
+      "Robert", "Anna", "Charles", "Molly", "Callum",
+      "Emma", "Gabriel", "Lottie", "Dylan", "Georgia",
+      "Reuben", "Amber", "Harrison", "Nancy", "Zachary",
+      "Bella", "George", "Jasmine", "Jackson", "Abigail",
+      "Finley", "Maisie", "Isaac", "Aria", "Ollie",
+      "Lucy", "Toby", "Eleanor", "Caleb", "Eliza",
+      "Edward", "Harriet", "Elijah", "Niamh", "Louis",
+      "Matilda", "Stanley", "Hannah", "Hunter", "Mary",
+      "Kai", "Orla", "Leon", "Bethany", "Jude",
+      "Annabelle", "Riley", "Cara", "Austin", "Aimee",
+      "Finn", "Erin", "Elliot", "Beatrice", "Nathanial",
+      "Francesca", "Aaron", "Darcy", "Blake", "Isla",
+      "Alfie", "Heidi", "Liam", "Georgia", "Jasper",
+      "Martha", "Mason", "Tilly", "Lachlan", "Lara",
+      "Arlo", "Lillian", "Owen", "Darcie", "Felix",
+      "Robyn", "Harvey", "Anna", "Rory", "Nina",
+      "Ellis", "Lydia", "Rhys", "Eloise", "Arthur",
+      "Maya", "Rory", "Martha", "Albert", "Sofia",
+      "Cameron", "Lauren", "Louis", "Lacey", "Tristan",
+      "Nicole", "Oscar", "Elodie", "Nolan", "Skye",
+      "Harley", "Isla", "Carter", "Emilia", "Luca",
+      "Zoe", "Dexter", "Ella", "Roman", "Demi",
+      "Elliot", "Bella", "Reuben", "Summer", "Jenson",
+      "Leah", "Zac", "Lottie", "Bobby", "Faith",
+      "Kian", "Jade", "Leonardo", "Clara", "Marco",
+      "Edith", "Albert", "Roberta"
+
+    ];
+
+    const segundo_nombre = [
+      "Giovanni", "Maria", "Antonio", "Giuseppe", "Anna",
+      "Luigi", "Francesca", "Angelo", "Rosa", "Salvatore",
+      "Carmela", "Pasquale", "Grazia", "Michele", "Giuseppina",
+      "Carmine", "Lucia", "Raffaele", "Teresa", "Vincenzo",
+      "Filomena", "Gennaro", "Concetta", "Giulio", "Nunzia",
+      "Cristiano", "Assunta", "Mario", "Adriana", "Domenico",
+      "Antonietta", "Marco", "Giovanna", "Vito", "Elisa",
+      "Dario", "Elena", "Pietro", "Luisa", "Enzo",
+      "Giusy", "Simone", "Rosaria", "Giuliano", "Valentina",
+      "Fabio", "Laura", "Stefano", "Beatrice", "Leonardo",
+      "Roberta", "Davide", "Patrizia", "Massimo", "Gabriella",
+      "Luca", "Daniela", "Massimiliano", "Silvia", "Riccardo",
+      "Monica", "Daniele", "Alessandra", "Fabrizio", "Cinzia",
+      "Claudio", "Sabrina", "Emanuele", "Federica", "Renato",
+      "Serena", "Mauro", "Chiara", "Alessandro", "Martina",
+      "Giorgio", "Giorgia", "Renzo", "Ilaria", "Roberto",
+      "Serena", "Alberto", "Francesca", "Giacomo", "Alessia",
+      "Enrico", "Sara", "Paolo", "Emanuela", "Guido",
+      "Alice", "Gino", "Valeria", "Giacomo", "Cristina",
+      "Piero", "Barbara", "Oscar", "Elisabetta", "Carlo",
+      "Nicoletta", "Lorenzo", "Monica", "Dario", "Linda",
+      "Rino", "Manuela", "Vittorio", "Caterina", "Romeo",
+      "Roberta", "Alfredo", "Maria", "Alberto", "Carmen",
+      "Fabrizio", "Nadia", "Bruno", "Giulia", "Marino",
+      "Lucia", "Adriano", "Loredana", "Dante", "Gianna",
+      "Giancarlo", "Sabrina", "Giuliano", "Elena", "Giuliano",
+      "Giulia", "Renato", "Sonia", "Ezio", "Caterina",
+      "Marco", "Isabella", "Gianluca", "Tiziana", "Gianni",
+      "Erika", "Gianni", "Miriam", "Luciano", "Natalia",
+      "Luciano", "Francesca", "Eugenio", "Annalisa", "Emanuele",
+      "Alessandra", "Guido", "Paola", "Silvano", "Stefania",
+      "Valerio", "Lorena", "Sergio", "Lucia", "Carlo",
+      "Loredana", "Emilio", "Sofia", "Giuseppe", "Elvira",
+      "Daniele", "Anna", "Antonio", "Laura", "Sergio",
+      "Rita", "Cristian", "Marina", "Alessio", "Antonella",
+      "Renzo", "Roberta", "Giulio", "Giovanna", "Leonardo",
+      "Elisabetta", "Giovanni", "Eleonora", "Giuseppe", "Miriam",
+      "Vittorio", "Carla", "Federico", "Cinzia", "Maurizio",
+      "Gabriella", "Tiziano", "Elisa", "Ivan", "Rosa",
+      "Stefano", "Serena", "Roberto", "Luciana", "Riccardo",
+      "Margherita", "Giacomo", "Annalisa", "Nicola", "Sonia",
+      "Luigi", "Patrizia", "Francesco", "Marisa", "Fabio",
+      "Valeria", "Giovanni", "Caterina", "Domenico", "Giuseppina"
+
+    ];
+
+
+    function generarFechaAleatoria() {
+      var año = Math.floor(Math.random() * (2022 - 2000 + 1)) + 2000;
+      var mes = Math.floor(Math.random() * 12) + 1;
+      var dia = Math.floor(Math.random() * 31) + 1;
+      var hora = Math.floor(Math.random() * 24);
+      var minuto = Math.floor(Math.random() * 60);
+      var segundo = Math.floor(Math.random() * 60);
+
+      // Crea el objeto Date con los valores aleatorios
+      var fechaAleatoria = new Date(año, mes - 1, dia, hora, minuto, segundo);
+
+      // Formatea la fecha en el formato deseado (Año-Mes-Día)
+      var fechaFormateada = fechaAleatoria.toISOString().split("T")[0];
+
+      return fechaFormateada;
+    }
+
+
+
+
+    function generarFechaAleatoria() {
+      var año = Math.floor(Math.random() * (2022 - 2000 + 1)) + 2000;
+      var mes = Math.floor(Math.random() * 12) + 1;
+      var dia = Math.floor(Math.random() * 31) + 1;
+      var hora = Math.floor(Math.random() * 24);
+      var minuto = Math.floor(Math.random() * 60);
+      var segundo = Math.floor(Math.random() * 60);
+
+      // Crea el objeto Date con los valores aleatorios
+      var fechaAleatoria = new Date(año, mes - 1, dia, hora, minuto, segundo);
+
+      // Formatea la fecha en el formato deseado (Año-Mes-Día)
+      var fechaFormateada = fechaAleatoria.toISOString().split("T")[0];
+
+      return fechaFormateada;
+    }
+
+
+
+
+    function generarAlumnosSQL() {
+
+      var numeroVentas = document.getElementById("NumRegistros").value;
+      var select = document.getElementById("usuario");
+      var opcion = select.options[select.selectedIndex].value;
+      var salida = ` CREATE DATABASE IF NOT EXISTS sistema_escolar;<br> USE sistema_escolar;<br> CREATE TABLE IF NOT EXISTS ${opcion} (<br>  expediente INT(11) UNSIGNED NOT NULL UNIQUE,<br>  apellido1 VARCHAR(255) NOT NULL,<br>  apellido2 VARCHAR(255),<br>  nombre VARCHAR(255) NOT NULL,<br>  correo_institucional VARCHAR(255) NOT NULL UNIQUE<br>, contraseña VARCHAR(100), fecha_nacimiento DATE);<br> INSERT INTO ${opcion} (expediente, apellido1, apellido2, nombre, correo_institucional, contraseña, fecha_nacimiento) VALUES <br>`;
+      var matriculaAlumno = 222200017;
+      var matriculaAcademico = 777700020;
+      var matriculaAdmin = 999900020;
+
+      switch (opcion) {
+        case "alumno":
+          for (let i = 0; i < numeroVentas; i++) {
+            salida += ` (${matriculaAlumno}, '${primer_apellido[Math.floor(Math.random() * 199)]}','${segundo_apellido[Math.floor(Math.random() * 199)]}', '${primer_nombre[Math.floor(Math.random() * 194)]}', '${segundo_nombre[Math.floor(Math.random() * 199)]}', '${matriculaAlumno++}@unison.mx', MD5('123'), '` + generarFechaAleatoria() + `' ),`;
+
+            if (i == numeroVentas - 1) {
+              salida = salida.slice(0, -1) + ";"; // Eliminar la coma y agregar punto y coma
+            }
+
+            salida += " <br>";
+          }
+          break;
+
+        case "academicos":
+          for (let i = 0; i < numeroVentas; i++) {
+            salida += ` (${matriculaAcademico}, '${primer_apellido[Math.floor(Math.random() * 199)]}',
+          '${segundo_apellido[Math.floor(Math.random() * 199)]}', '${primer_nombre[Math.floor(Math.random() * 194)]}
+          ${segundo_nombre[Math.floor(Math.random() * 199)]}', '${matriculaAcademico++}@acadunison.mx', MD5('123'), '` + generarFechaAleatoria() + `' ),`;
+
+            if (i == numeroVentas - 1) {
+              salida = salida.slice(0, -1) + ";"; // Eliminar la coma y agregar punto y coma
+            }
+
+            salida += " <br>";
+          }
+          break;
+
+        case "administrativos":
+          for (let i = 0; i < numeroVentas; i++) {
+            salida += ` (${matriculaAdmin}, '${primer_apellido[Math.floor(Math.random() * 199)]}',
+          '${segundo_apellido[Math.floor(Math.random() * 199)]}', '${primer_nombre[Math.floor(Math.random() * 194)]}
+          ${segundo_nombre[Math.floor(Math.random() * 199)]}', '${matriculaAdmin++}@adminunison.mx', MD5('123'), '` + generarFechaAleatoria() + `' ),`;
+
+            if (i == numeroVentas - 1) {
+              salida = salida.slice(0, -1) + ";"; // Eliminar la coma y agregar punto y coma
+            }
+
+            salida += " <br>";
+          }
+          break;
+
+      }
+
+      document.getElementById("salida").innerHTML = salida;
+    }
+
+
+    function descargarSQL() {
+      var contenidoSQL = document.getElementById("salida").innerText;
+      var blob = new Blob([contenidoSQL], { type: "text/plain" });
+      var url = window.URL.createObjectURL(blob);
+      var a = document.createElement("a");
+      a.href = url;
+      a.download = "alumnos.sql";
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      window.URL.revokeObjectURL(url);
+    }
+
+    function generarAlumnosCSV() {
+      var numeroVentas = document.getElementById("NumRegistros").value;
+      var contenidoCSV = "expediente,apellido1,apellido2,nombre,correo_institucional,contraseña,fecha_nacimiento\n";
+      var matriculaAlumno = 222200017;
+
+      // Obtener los datos según la opción seleccionada
+      var select = document.getElementById("usuario");
+      var opcion = select.options[select.selectedIndex].value;
+
+      // Generar los datos según la opción seleccionada
+      switch (opcion) {
+        case "alumno":
+          for (let i = 0; i < numeroVentas; i++) {
+            contenidoCSV += `${matriculaAlumno},${primer_apellido[Math.floor(Math.random() * 199)]},${segundo_apellido[Math.floor(Math.random() * 199)]},${primer_nombre[Math.floor(Math.random() * 194)]} ${segundo_nombre[Math.floor(Math.random() * 199)]},${matriculaAlumno++}@unison.mx,MD5('123'),${generarFechaAleatoria()}\n`;
+          }
+          break;
+        case "academicos":
+          for (let i = 0; i < numeroVentas; i++) {
+            contenidoCSV += `${matriculaAlumno},${primer_apellido[Math.floor(Math.random() * 199)]},${segundo_apellido[Math.floor(Math.random() * 199)]},${primer_nombre[Math.floor(Math.random() * 194)]} ${segundo_nombre[Math.floor(Math.random() * 199)]},${matriculaAlumno++}@acadunison.mx,MD5('123'),${generarFechaAleatoria()}\n`;
+          }
+          break;
+        case "administrativos":
+          for (let i = 0; i < numeroVentas; i++) {
+            contenidoCSV += `${matriculaAlumno},${primer_apellido[Math.floor(Math.random() * 199)]},${segundo_apellido[Math.floor(Math.random() * 199)]},${primer_nombre[Math.floor(Math.random() * 194)]} ${segundo_nombre[Math.floor(Math.random() * 199)]},${matriculaAlumno++}@adminunison.mx,MD5('123'),${generarFechaAleatoria()}\n`;
+          }
+          break;
+      }
+
+      document.getElementById("salida").innerHTML = contenidoCSV;
+    }
+
+    function generarAlumnosJSON() {
+      var numeroVentas = document.getElementById("NumRegistros").value;
+      var contenidoJSON = [];
+
+      // Obtener los datos según la opción seleccionada
+      var select = document.getElementById("usuario");
+      var opcion = select.options[select.selectedIndex].value;
+
+      // Generar los datos según la opción seleccionada
+      switch (opcion) {
+        case "alumno":
+          for (let i = 0; i < numeroVentas; i++) {
+            contenidoJSON.push({
+              expediente: 222200017 + i,
+              apellido1: primer_apellido[Math.floor(Math.random() * 199)],
+              apellido2: segundo_apellido[Math.floor(Math.random() * 199)],
+              nombre: primer_nombre[Math.floor(Math.random() * 194)] + " " + segundo_nombre[Math.floor(Math.random() * 199)],
+              correo_institucional: (222200017 + i) + "@unison.mx",
+              contraseña: "123",
+              fecha_nacimiento: generarFechaAleatoria()
+            });
+          }
+          break;
+
+        case "academicos":
+          for (let i = 0; i < numeroVentas; i++) {
+            contenidoJSON.push({
+              expediente: 777700020 + i,
+              apellido1: primer_apellido[Math.floor(Math.random() * 199)],
+              apellido2: segundo_apellido[Math.floor(Math.random() * 199)],
+              nombre: primer_nombre[Math.floor(Math.random() * 194)] + " " + segundo_nombre[Math.floor(Math.random() * 199)],
+              correo_institucional: (777700020 + i) + "@acadunison.mx",
+              contraseña: "123",
+              fecha_nacimiento: generarFechaAleatoria()
+            });
+          }
+          break;
+
+        case "administrativos":
+          for (let i = 0; i < numeroVentas; i++) {
+            contenidoJSON.push({
+              expediente: 999900020 + i,
+              apellido1: primer_apellido[Math.floor(Math.random() * 199)],
+              apellido2: segundo_apellido[Math.floor(Math.random() * 199)],
+              nombre: primer_nombre[Math.floor(Math.random() * 194)] + " " + segundo_nombre[Math.floor(Math.random() * 199)],
+              correo_institucional: (999900020 + i) + "@adminunison.mx",
+              contraseña: "123",
+              fecha_nacimiento: generarFechaAleatoria()
+            });
+          }
+          break;
+      }
+
+      // Convertir contenido a JSON
+      var contenidoJSONString = JSON.stringify(contenidoJSON, null, 2);
+
+      document.getElementById("salida").innerHTML = contenidoJSONString;
+    }
+
+    function descargarJSON() {
+      var contenidoJSONString = document.getElementById("salida").innerText;
+      var blob = new Blob([contenidoJSONString], { type: "application/json" });
+      var url = window.URL.createObjectURL(blob);
+      var a = document.createElement("a");
+      a.href = url;
+      a.download = "alumnos.json";
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      window.URL.revokeObjectURL(url);
+    }
+
+    function descargarCSV() {
+      var contenidoCSV = document.getElementById("salida").innerText;
+      var blob = new Blob([contenidoCSV], { type: "text/csv" });
+      var url = window.URL.createObjectURL(blob);
+      var a = document.createElement("a");
+      a.href = url;
+      a.download = "alumnos.csv";
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      window.URL.revokeObjectURL(url);
+    }
+
+  </script>
+</head>
+
+<body>
+
+Número de alumnos/académicos/administrativos a generar:
+<input type="number" id="NumRegistros" required />
+<select name="opcion" id="usuario">
+    <option value="alumno">
+        Alumnos
+    </option>
+
+    <option value="academicos">
+        Académicos
+    </option>
+
+    <option value="administrativos">
+        Administrativos
+    </option>
+</select>
+<br>
+<input type="button" value="Generar en SQL" onclick="generarAlumnosSQL()" />
+<input type="button" value="Generar en CSV" onclick="generarAlumnosCSV()" />
+<input type="button" value="Generar en JSON" onclick="generarAlumnosJSON()" />
+<input type="button" value="Descargar SQL" onclick="descargarSQL()" />
+<input type="button" value="Descargar CSV" onclick="descargarCSV()" />
+<input type="button" value="Descargar JSON" onclick="descargarJSON()" />
+<br><br>
+<div id="salida" style="white-space: pre;"></div>
+
+</body>
+
+</html>
