@@ -223,7 +223,7 @@
       var numeroVentas = document.getElementById("NumRegistros").value;
       var select = document.getElementById("usuario");
       var opcion = select.options[select.selectedIndex].value;
-      var salida = ` CREATE DATABASE IF NOT EXISTS sistema_escolar;<br> USE sistema_escolar;<br> CREATE TABLE IF NOT EXISTS ${opcion} (<br>  expediente INT(11) UNSIGNED NOT NULL UNIQUE,<br>  apellido1 VARCHAR(255) NOT NULL,<br>  apellido2 VARCHAR(255),<br>  nombre VARCHAR(255) NOT NULL,<br>  correo_institucional VARCHAR(255) NOT NULL UNIQUE<br>, contraseña VARCHAR(100), fecha_nacimiento DATE);<br> INSERT INTO ${opcion} (expediente, apellido1, apellido2, nombre, correo_institucional, contraseña, fecha_nacimiento) VALUES <br>`;
+      var salida = ` CREATE DATABASE IF NOT EXISTS sistema_escolar;<br> USE sistema_escolar;<br> CREATE TABLE IF NOT EXISTS ${opcion} (<br>  expediente INT(11) UNSIGNED NOT NULL UNIQUE,<br>  apellido1 VARCHAR(255) NOT NULL,<br>  apellido2 VARCHAR(255),<br>  nombres VARCHAR(255) NOT NULL,<br>  correo_inst VARCHAR(255) NOT NULL UNIQUE<br>, contrasenia VARCHAR(100), fecha_nac DATE);<br> INSERT INTO ${opcion} (expediente, apellido1, apellido2, nombres, correo_inst, contrasenia, fecha_nac) VALUES <br>`;
       var matriculaAlumno = 222200017;
       var matriculaAcademico = 777700020;
       var matriculaAdmin = 999900020;
@@ -243,10 +243,7 @@
 
         case "academicos":
           for (let i = 0; i < numeroVentas; i++) {
-            salida += ` (${matriculaAcademico}, '${primer_apellido[Math.floor(Math.random() * 199)]}',
-          '${segundo_apellido[Math.floor(Math.random() * 199)]}', '${primer_nombre[Math.floor(Math.random() * 194)]}
-          ${segundo_nombre[Math.floor(Math.random() * 199)]}', '${matriculaAcademico++}@acadunison.mx', MD5('123'), '` + generarFechaAleatoria() + `' ),`;
-
+            salida += ` (${matriculaAcademico}, '${primer_apellido[Math.floor(Math.random() * 199)]}','${segundo_apellido[Math.floor(Math.random() * 199)]}', '${primer_nombre[Math.floor(Math.random() * 194)]} ${segundo_nombre[Math.floor(Math.random() * 199)]}', '${matriculaAcademico++}@acadunison.mx', MD5('123'), '` + generarFechaAleatoria() + `' ),`;
             if (i == numeroVentas - 1) {
               salida = salida.slice(0, -1) + ";"; // Eliminar la coma y agregar punto y coma
             }
@@ -257,9 +254,7 @@
 
         case "administrativos":
           for (let i = 0; i < numeroVentas; i++) {
-            salida += ` (${matriculaAdmin}, '${primer_apellido[Math.floor(Math.random() * 199)]}',
-          '${segundo_apellido[Math.floor(Math.random() * 199)]}', '${primer_nombre[Math.floor(Math.random() * 194)]}
-          ${segundo_nombre[Math.floor(Math.random() * 199)]}', '${matriculaAdmin++}@adminunison.mx', MD5('123'), '` + generarFechaAleatoria() + `' ),`;
+            salida += ` (${matriculaAdmin}, '${primer_apellido[Math.floor(Math.random() * 199)]}','${segundo_apellido[Math.floor(Math.random() * 199)]}', '${primer_nombre[Math.floor(Math.random() * 194)]} ${segundo_nombre[Math.floor(Math.random() * 199)]}', '${matriculaAdmin++}@adminunison.mx', MD5('123'), '` + generarFechaAleatoria() + `' ),`;
 
             if (i == numeroVentas - 1) {
               salida = salida.slice(0, -1) + ";"; // Eliminar la coma y agregar punto y coma
@@ -290,7 +285,7 @@
 
     function generarAlumnosCSV() {
       var numeroVentas = document.getElementById("NumRegistros").value;
-      var contenidoCSV = "expediente,apellido1,apellido2,nombre,correo_institucional,contraseña,fecha_nacimiento\n";
+      var contenidoCSV = "expediente,apellido1,apellido2,nombres,correo_inst,contrasenia,fecha_nac\n";
       var matriculaAlumno = 222200017;
 
       // Obtener los datos según la opción seleccionada
@@ -335,10 +330,10 @@
               expediente: 222200017 + i,
               apellido1: primer_apellido[Math.floor(Math.random() * 199)],
               apellido2: segundo_apellido[Math.floor(Math.random() * 199)],
-              nombre: primer_nombre[Math.floor(Math.random() * 194)] + " " + segundo_nombre[Math.floor(Math.random() * 199)],
-              correo_institucional: (222200017 + i) + "@unison.mx",
-              contraseña: "123",
-              fecha_nacimiento: generarFechaAleatoria()
+              nombres: primer_nombre[Math.floor(Math.random() * 194)] + " " + segundo_nombre[Math.floor(Math.random() * 199)],
+              correo_inst: (222200017 + i) + "@unison.mx",
+              contrasenia: "MD5(123)",
+              fecha_nac: generarFechaAleatoria()
             });
           }
           break;
@@ -349,10 +344,10 @@
               expediente: 777700020 + i,
               apellido1: primer_apellido[Math.floor(Math.random() * 199)],
               apellido2: segundo_apellido[Math.floor(Math.random() * 199)],
-              nombre: primer_nombre[Math.floor(Math.random() * 194)] + " " + segundo_nombre[Math.floor(Math.random() * 199)],
-              correo_institucional: (777700020 + i) + "@acadunison.mx",
-              contraseña: "123",
-              fecha_nacimiento: generarFechaAleatoria()
+              nombres: primer_nombre[Math.floor(Math.random() * 194)] + " " + segundo_nombre[Math.floor(Math.random() * 199)],
+              correo_inst: (777700020 + i) + "@acadunison.mx",
+              contrasenia: "MD5(123)",
+              fecha_nac: generarFechaAleatoria()
             });
           }
           break;
@@ -363,10 +358,10 @@
               expediente: 999900020 + i,
               apellido1: primer_apellido[Math.floor(Math.random() * 199)],
               apellido2: segundo_apellido[Math.floor(Math.random() * 199)],
-              nombre: primer_nombre[Math.floor(Math.random() * 194)] + " " + segundo_nombre[Math.floor(Math.random() * 199)],
-              correo_institucional: (999900020 + i) + "@adminunison.mx",
-              contraseña: "123",
-              fecha_nacimiento: generarFechaAleatoria()
+              nombres: primer_nombre[Math.floor(Math.random() * 194)] + " " + segundo_nombre[Math.floor(Math.random() * 199)],
+              correo_inst: (999900020 + i) + "@adminunison.mx",
+              contrasenia: "MD5(123)",
+              fecha_nac: generarFechaAleatoria()
             });
           }
           break;
